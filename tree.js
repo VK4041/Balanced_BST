@@ -101,6 +101,9 @@ export default class BSTree {
     //Return current node to previous call to continue recursion
     return root;
   }
+  includes(value) {
+    return this.searchNode(value) ? true : false;
+  }
   searchNode(value, root = this.root) {
     if (root === null) return null;
     if (value < root.value) return this.searchNode(value, root.leftChild);

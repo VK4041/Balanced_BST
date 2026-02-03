@@ -4,8 +4,6 @@ try {
   const tree = new BSTree(testArray);
 
   tree.prettyPrint();
-  tree.delete(5);
-  tree.prettyPrint();
 } catch (err) {
   console.log(err);
 }
