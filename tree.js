@@ -131,4 +131,28 @@ export default class BSTree {
       return count;
     }
   }
+  levelOrderForEachIter(callback, root = this.root) {
+    if (!callback) throw new Error("A callback must be provided!");
+    if (root === null) return;
+    const Q = [root];
+    while (Q.length !== 0) {
+      let seen = Q.shift();
+      callback(seen.value);
+      if (seen.leftChild) Q.push(seen.leftChild);
+      if (seen.rightChild) Q.push(seen.rightChild);
+    }
+  }
+  levelOrderForEachRecur(callback, Q = [this.root]) {
+    if (!callback) throw new Error("A callback must be provided!");
+    if (this.root === null) return;
+    if (Q.length === 0) return;
+
+    const seen = Q.shift();
+    callback(seen.value);
+
+    if (seen.leftChild) Q.push(seen.leftChild);
+    if (seen.rightChild) Q.push(seen.rightChild);
+
+    this.levelOrderForEachRecur(callback, Q);
+  }
 }

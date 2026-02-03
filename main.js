@@ -4,6 +4,10 @@ try {
   const tree = new BSTree(testArray);
 
   tree.prettyPrint();
+  function display(value) {
+    console.log(`Callback on value: ${value}`);
+  }
+  tree.levelOrderForEachRecur(display);
 } catch (err) {
   console.log(err);
 }
