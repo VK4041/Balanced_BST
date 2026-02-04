@@ -131,6 +131,7 @@ export default class BSTree {
       return count;
     }
   }
+  //BFS
   levelOrderForEachIter(callback, root = this.root) {
     if (!callback) throw new Error("A callback must be provided!");
     if (root === null) return;
@@ -154,5 +155,27 @@ export default class BSTree {
     if (seen.rightChild) Q.push(seen.rightChild);
 
     this.levelOrderForEachRecur(callback, Q);
+  }
+  //DFS
+  inOrderForEach(callback, root = this.root) {
+    if (root === null) return;
+    if (!callback) throw new Error("A callback must be provided!");
+    this.inOrderForEach(callback, root.leftChild);
+    callback(root.value);
+    this.inOrderForEach(callback, root.rightChild);
+  }
+  preOrderForEach(callback, root = this.root) {
+    if (root === null) return;
+    if (!callback) throw new Error("A callback must be provided!");
+    callback(root.value);
+    this.preOrderForEach(callback, root.leftChild);
+    this.preOrderForEach(callback, root.rightChild);
+  }
+  postOrderForEach(callback, root = this.root) {
+    if (root === null) return;
+    if (!callback) throw new Error("A callback must be provided!");
+    this.postOrderForEach(callback, root.leftChild);
+    this.postOrderForEach(callback, root.rightChild);
+    callback(root.value);
   }
 }
