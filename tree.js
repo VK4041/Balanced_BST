@@ -178,4 +178,28 @@ export default class BSTree {
     this.postOrderForEach(callback, root.rightChild);
     callback(root.value);
   }
+  isBalanced(root = this.root) {
+    if (root === null) return true;
+    let leftTreeHeight = root.leftChild
+      ? this.height(root.leftChild.value)
+      : -1;
+    let rightTreeHeight = root.rightChild
+      ? this.height(root.rightChild.value)
+      : -1;
+    let diff = Math.abs(leftTreeHeight - rightTreeHeight);
+    return (
+      diff <= 1 &&
+      this.isBalanced(root.leftChild) &&
+      this.isBalanced(root.rightChild)
+    );
+  }
+  reBalance() {
+    if (!this.isBalanced()) {
+      const input = [];
+      this.inOrderForEach((value) => input.push(value));
+      //Create new balanced tree
+      this.root = this.buildTree(input); //Re-assign root
+      console.log("Tree is now balanced");
+    } else console.log("Tree is already balanced!");
+  }
 }
